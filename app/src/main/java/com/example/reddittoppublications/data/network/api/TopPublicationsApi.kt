@@ -1,6 +1,6 @@
 package com.example.reddittoppublications.data.network.api
 
-import com.example.tesssst.model.TopResponseJsonGson
+import com.example.reddittoppublications.data.source.toppubl.remote.dto.response.TopPublicationsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,5 +14,5 @@ interface TopPublicationsApi {
         @Query("before") before: String,
         @Query("count") count: Int,
         @Query("limit") limit: Int,
-    ): Response<TopResponseJsonGson>
+    ): Response<TopPublicationsResponse>
 }

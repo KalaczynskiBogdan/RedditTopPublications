@@ -1,9 +1,9 @@
-package com.example.tesssst.model
+package com.example.reddittoppublications.data.source.toppubl.remote.dto.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class DataGsonX(
+data class DataXJson(
     @SerializedName("author")
     val author: String? = "",
     @SerializedName("created")
@@ -13,7 +13,7 @@ data class DataGsonX(
     @SerializedName("num_comments")
     val numComments: Int? = 0,
     @SerializedName("preview")
-    val preview: PreviewGson? = PreviewGson(),
+    val preview: PreviewJson? = PreviewJson(),
     @SerializedName("title")
     val title: String? = "",
 )

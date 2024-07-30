@@ -1,9 +1,9 @@
-package com.example.tesssst.model
+package com.example.reddittoppublications.data.source.toppubl.remote.dto.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class SourceGson(
+data class SourceJson(
     @SerializedName("height")
     val height: Int? = null,
     @SerializedName("url")

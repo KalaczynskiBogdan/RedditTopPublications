@@ -1,11 +1,11 @@
-package com.example.tesssst.model
+package com.example.reddittoppublications.data.source.toppubl.remote.dto.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class PreviewGson(
+data class PreviewJson(
     @SerializedName("enabled")
     val enabled: Boolean? = false,
     @SerializedName("images")
-    val images: List<ImageGson>? = listOf()
+    val images: List<ImageJson>? = listOf()
 )
