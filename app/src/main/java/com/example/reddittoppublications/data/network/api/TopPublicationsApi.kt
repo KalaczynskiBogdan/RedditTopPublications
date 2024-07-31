@@ -14,5 +14,5 @@ interface TopPublicationsApi {
         @Query("before") before: String,
         @Query("count") count: Int,
         @Query("limit") limit: Int,
-    ): Response<TopPublicationsResponse>
+    ): TopPublicationsResponse
 }

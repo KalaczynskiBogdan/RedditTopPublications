@@ -1,4 +1,4 @@
-package com.example.reddittoppublications.data.di
+package com.example.reddittoppublications.data.network.modules
 
 import com.example.reddittoppublications.data.network.api.TopPublicationsApi
 import dagger.Module

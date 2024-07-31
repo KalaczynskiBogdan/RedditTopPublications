@@ -1,6 +1,7 @@
 package com.example.reddittoppublications.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,15 @@ class TopPublicationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getList()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.topPublicationsLiveData.observe(viewLifecycleOwner) {
+            Log.d("result", it.toString())
+            val result = it[1]
+            binding.ivTitle.text = result.dataX.numComments.toString()
+        }
     }
 
     override fun onDestroyView() {

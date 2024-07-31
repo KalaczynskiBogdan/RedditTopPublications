@@ -1,8 +1,12 @@
 package com.example.reddittoppublications.ui.main
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.reddittoppublications.domain.models.Children
+import com.example.reddittoppublications.domain.models.DataX
+import com.example.reddittoppublications.domain.usecase.toppubl.GetListOfTopPublicationsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,25 +15,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TopPublicationsViewModel @Inject constructor(
-    private val repository: Repository
-):ViewModel() {
+    private val getListOfTopPublicationsUseCase: GetListOfTopPublicationsUseCase
+) : ViewModel() {
+
+    val topPublicationsLiveData = MutableLiveData<List<Children>>()
 
     fun getList() {
         viewModelScope.launch {
-            try {
-                val result = withContext(Dispatchers.IO){
-                    repository.getList()
-                }
-                if (result.isSuccessful){
-                    val response = result.body()
-                    Log.d("response", response.toString())
-                }
-                else{
-                    Log.d("error", "${result.code()}")
-                }
-            }catch (e : Exception){
-                Log.e("result", "Exc: ${e.message}")
-            }
+            val result = getListOfTopPublicationsUseCase.execute(t = "day",
+                after = "t1_c3v7f8",
+                before = "t1_c3v7f9",
+                count = 3,
+                limit = 5)
+            topPublicationsLiveData.postValue(result)
         }
     }
 }
