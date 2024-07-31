@@ -21,8 +21,8 @@ class TopPublicationsViewModel @Inject constructor(
             val result = getListOfTopPublicationsUseCase.execute(t = "day",
                 after = "t1_c3v7f8",
                 before = "t1_c3v7f9",
-                count = 3,
-                limit = 5)
+                count = 0,
+                limit = 20)
             topPublicationsLiveData.postValue(result)
         }
     }

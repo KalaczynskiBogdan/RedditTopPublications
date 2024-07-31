@@ -35,12 +35,15 @@ fun DataJson.toUi(): Data {
 
 fun DataXJson.toUi() : DataX{
     return DataX(
+        id = id ?: "",
         author = author ?: "",
         created = created ?: -1.0,
         createdUtc = createdUtc ?: -1.0,
+        postHint = postHint ?: "",
         numComments = numComments ?: -1,
         preview = (preview ?: PreviewJson()).toUi(),
-        title = title ?: ""
+        thumbnail = thumbnail ?: "",
+        isVideo = isVideo ?: false
         )
 }
 

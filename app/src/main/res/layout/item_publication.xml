@@ -13,8 +13,8 @@
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cvImageOfPublication"
+        app:layout_constraintTop_toTopOf="@id/cvImageOfPublication"
         tools:text="Author name" />
 
     <TextView
@@ -23,12 +23,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/tvAuthorOfPublication"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="·" />
+        app:layout_constraintTop_toTopOf="@id/tvAuthorOfPublication"
+        app:layout_constraintBottom_toBottomOf="@id/tvAuthorOfPublication"
+        android:text="·" />
 
     <TextView
         android:textColor="@color/grey2"
@@ -36,42 +36,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/tvInter"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="20 hr." />
-
-    <TextView
-        android:textColor="@color/grey2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/tvDateOfPublication"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="ago" />
+        app:layout_constraintTop_toTopOf="@id/tvInter"
+        app:layout_constraintBottom_toBottomOf="@id/tvInter"
+        tools:text="20 hr. ago" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvImageOfPublication"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="104dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_corner_background"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAuthorOfPublication">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ivImageOfPublication"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
             android:scaleType="fitXY"
+            android:id="@+id/ivImageOfPublication"
+            android:layout_width="104dp"
+            android:layout_height="80dp"
+            android:adjustViewBounds="true"
             tools:src="@tools:sample/backgrounds/scenic" />
     </androidx.cardview.widget.CardView>
 
@@ -80,23 +69,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_corner_background_for_buttons"
-        android:backgroundTint="@color/grey"
-        android:padding="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvImageOfPublication">
-
-        <ImageView
-            android:id="@+id/ivComments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_comments"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/cvImageOfPublication"
+        app:layout_constraintStart_toEndOf="@id/cvImageOfPublication"
+        >
 
         <TextView
+            android:textColor="@color/grey2"
             android:id="@+id/tvCountOfComments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,7 +84,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivComments"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="1250" />
+            tools:text="1250 comments" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,7 +97,7 @@
         android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clCountOfComments" />
+        app:layout_constraintTop_toBottomOf="@+id/cvImageOfPublication" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
