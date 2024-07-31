@@ -35,7 +35,6 @@ class TopPublicationsFragment : Fragment() {
         viewModel.topPublicationsLiveData.observe(viewLifecycleOwner) {
             Log.d("result", it.toString())
             val result = it[1]
-            binding.ivTitle.text = result.dataX.numComments.toString()
         }
     }
 

@@ -1,16 +1,12 @@
 package com.example.reddittoppublications.ui.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reddittoppublications.domain.models.Children
-import com.example.reddittoppublications.domain.models.DataX
 import com.example.reddittoppublications.domain.usecase.toppubl.GetListOfTopPublicationsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
