@@ -80,12 +80,13 @@
             app:layout_constraintTop_toBottomOf="@+id/clTopTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
-            tools:listitem="@layout/item_publication"
-            app:layout_constraintTop_toBottomOf="@+id/vLine"
-            android:nestedScrollingEnabled="false"
             android:id="@+id/rvPublications"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/vLine"
+            tools:layout_editor_absoluteX="0dp"
+            tools:listitem="@layout/item_publication" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
