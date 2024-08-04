@@ -29,6 +29,8 @@ okhttp = "4.12.0"
 glide = "4.16.0"
 junit = "4.12"
 
+pagingCommonAndroid = "3.3.1"
+
 [libraries]
 # AndroidX
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -62,6 +64,10 @@ okhttp = { group = "com.squareup.okhttp3", name = "logging-interceptor", version
 # Glide
 glide = { group="com.github.bumptech.glide", name="glide", version.ref="glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+
+# Pagination
+androidx-paging-common-android = { group = "androidx.paging", name = "paging-common-android", version.ref = "pagingCommonAndroid" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingCommonAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -41,6 +41,8 @@ android {
 }
 
 dependencies {
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -48,6 +50,10 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // Pagination
+    implementation(libs.androidx.paging.common.android)
+    implementation(libs.androidx.paging.runtime)
 
     // Fragment
     implementation(libs.androidx.fragment.ktx)

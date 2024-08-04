@@ -8,7 +8,18 @@
         android:background="@color/black"
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:contentDescription="@null" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_margin="8dp"
+        android:contentDescription="@null"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="32dp"
+        android:layout_height="32dp"/>
 
     <Button
         android:backgroundTint="@color/white"
@@ -16,7 +27,7 @@
         style="@style/Widget.Material3.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="download"
+        android:text="@string/download"
         android:visibility="gone"
         app:icon="@drawable/ic_download"
         android:layout_marginBottom="16dp"

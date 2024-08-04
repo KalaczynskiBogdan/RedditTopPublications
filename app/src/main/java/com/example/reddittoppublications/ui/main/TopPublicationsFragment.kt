@@ -15,8 +15,10 @@ import com.example.reddittoppublications.ui.main.adapter.TopPublicationsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TopPublicationsFragment : Fragment() {
+class TopPublicationsFragment : Fragment(), TopPublicationsAdapter.OnItemClickListener {
     private val viewModel: TopPublicationsViewModel by activityViewModels()
+
+    private var publicationsAdapter: TopPublicationsAdapter? = null
 
     private var _binding: FragmentTopPublicationsBinding? = null
     private val binding get() = _binding!!
@@ -31,43 +33,41 @@ class TopPublicationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initObservers()
+        setupAdapter()
 
-        if (savedInstanceState == null) {
-            viewModel.getList()
-        }
+        initObservers()
     }
 
     private fun initObservers() {
-        viewModel.topPublicationsLiveData.observe(viewLifecycleOwner) {
-            showTopPublicationList(it)
+        viewModel.publicationsList.observe(viewLifecycleOwner) {
+            publicationsAdapter?.submitData(viewLifecycleOwner.lifecycle, it)
         }
     }
 
-    private fun showTopPublicationList(children: List<Children>) {
-        val adapter = TopPublicationsAdapter(object : TopPublicationsAdapter.OnItemClickListener {
-            override fun onImageClicked(position: Int, children: Children) {
-                val url = children.dataX.preview.images.getOrNull(0)?.source?.url
-
-                val imageFragment = ImageFullFragment.newInstance(url!!)
-
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.main, imageFragment)
-                    .addToBackStack(null)
-                    .commit()
-            }
-        })
-        adapter.submitList(children)
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.apply {
-            rvPublications.layoutManager = layoutManager
-            rvPublications.setHasFixedSize(true)
-            rvPublications.adapter = adapter
+    private fun setupAdapter() {
+        publicationsAdapter = TopPublicationsAdapter(this)
+        binding.rvPublications.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = publicationsAdapter
         }
     }
 
     override fun onDestroyView() {
+        publicationsAdapter = null
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onImageClicked(position: Int, children: Children) {
+        val url = viewModel.onImageClicked(children)
+
+        if (url != null) {
+            val imageFragment = ImageFullFragment.newInstance(url)
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.main, imageFragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }

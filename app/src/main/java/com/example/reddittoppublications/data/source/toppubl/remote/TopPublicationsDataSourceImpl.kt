@@ -10,8 +10,8 @@ class TopPublicationsDataSourceImpl @Inject constructor(
 ): TopPublicationsDataSource{
     override suspend fun getListOfTopPublications(
         t: String,
-        after: String,
-        before: String,
+        after: String?,
+        before: String?,
         count: Int,
         limit: Int
     ): List<Children> {

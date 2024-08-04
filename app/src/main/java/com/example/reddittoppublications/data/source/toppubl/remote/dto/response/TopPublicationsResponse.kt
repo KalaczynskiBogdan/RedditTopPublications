@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TopPublicationsResponse(
     @SerializedName("data")
-    val `data`: DataJson? = DataJson(),
+    val data: DataJson? = DataJson(),
     @SerializedName("kind")
     val kind: String? = ""
 )

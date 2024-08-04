@@ -1,5 +1,7 @@
 package com.example.reddittoppublications.domain.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
 import com.example.reddittoppublications.domain.models.Children
 
 interface TopPublicationsRepository {
@@ -10,4 +12,6 @@ interface TopPublicationsRepository {
         count: Int,
         limit: Int
     ): List<Children>
+
+    fun getPublications(): LiveData<PagingData<Children>>
 }

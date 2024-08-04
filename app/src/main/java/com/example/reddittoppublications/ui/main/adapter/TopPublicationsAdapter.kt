@@ -1,16 +1,22 @@
 package com.example.reddittoppublications.ui.main.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.reddittoppublications.R
 import com.example.reddittoppublications.databinding.ItemPublicationBinding
 import com.example.reddittoppublications.domain.models.Children
 import java.util.concurrent.TimeUnit
 
-class TopPublicationsAdapter(private val onItemClickListener: OnItemClickListener) :
-    ListAdapter<Children, TopPublicationsAdapter.TopPublicationsViewHolder>(DiffUtil()) {
+class TopPublicationsAdapter(
+    private val onItemClickListener: OnItemClickListener
+) :
+    PagingDataAdapter<Children, TopPublicationsAdapter.TopPublicationsViewHolder>(differCallback) {
 
     class TopPublicationsViewHolder(
         private var rawItemPublicationBinding: ItemPublicationBinding,
@@ -18,11 +24,12 @@ class TopPublicationsAdapter(private val onItemClickListener: OnItemClickListene
     ) :
         RecyclerView.ViewHolder(rawItemPublicationBinding.root) {
         fun bind(children: Children) {
+            Log.d("TopPublicationsViewHolder", "Binding Children: $children")
             setContent(children)
 
             if (!children.dataX.isVideo) {
                 rawItemPublicationBinding.ivImageOfPublication.setOnClickListener {
-                    onItemClickListener.onImageClicked(adapterPosition, children)
+                    onItemClickListener.onImageClicked(absoluteAdapterPosition, children)
                 }
             }
         }
@@ -30,8 +37,8 @@ class TopPublicationsAdapter(private val onItemClickListener: OnItemClickListene
         private fun setContent(children: Children) {
             rawItemPublicationBinding.apply {
                 tvAuthorOfPublication.text = children.dataX.author
-                tvDateOfPublication.text = getTimeAgo(children)
-                tvCountOfComments.text = "${children.dataX.numComments} comments"
+                tvDateOfPublication.text = getTimeAgo(tvDateOfPublication.context, children)
+                tvCountOfComments.text = tvCountOfComments.context.getString(R.string.comments, children.dataX.numComments)
 
                 if (!children.dataX.isVideo) {
                     Glide.with(root)
@@ -41,7 +48,8 @@ class TopPublicationsAdapter(private val onItemClickListener: OnItemClickListene
             }
         }
 
-        private fun getTimeAgo(children: Children): String {
+        private fun getTimeAgo(context: Context, children: Children): String {
+
             val created = children.dataX.created
             val currentTime = System.currentTimeMillis()
             val createdTime = (created * 1000).toLong()
@@ -51,12 +59,11 @@ class TopPublicationsAdapter(private val onItemClickListener: OnItemClickListene
             val minutesAgo = TimeUnit.MILLISECONDS.toMinutes(timeDifference) % 60
 
             return if (hoursAgo > 0) {
-                "$hoursAgo hr. ago"
+                context.getString(R.string.hours_ago, hoursAgo)
             } else {
-                "$minutesAgo min. ago"
+                context.getString(R.string.minutes_ago, minutesAgo)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopPublicationsViewHolder {
@@ -67,16 +74,21 @@ class TopPublicationsAdapter(private val onItemClickListener: OnItemClickListene
 
     override fun onBindViewHolder(holder: TopPublicationsViewHolder, position: Int) {
         val children = getItem(position)
-        holder.bind(children)
+        Log.d("TopPublicationsAdapter", "Binding item at position $position: $itemCount")
+        children?.let {
+            holder.bind(it)
+        }
     }
 
-    class DiffUtil : androidx.recyclerview.widget.DiffUtil.ItemCallback<Children>() {
-        override fun areItemsTheSame(oldItem: Children, newItem: Children): Boolean {
-            return oldItem.dataX.id == newItem.dataX.id
-        }
+    companion object {
+        val differCallback = object : DiffUtil.ItemCallback<Children>() {
+            override fun areItemsTheSame(oldItem: Children, newItem: Children): Boolean {
+                return oldItem.dataX.id == newItem.dataX.id
+            }
 
-        override fun areContentsTheSame(oldItem: Children, newItem: Children): Boolean {
-            return oldItem == newItem
+            override fun areContentsTheSame(oldItem: Children, newItem: Children): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 
@@ -84,3 +96,4 @@ class TopPublicationsAdapter(private val onItemClickListener: OnItemClickListene
         fun onImageClicked(position: Int, children: Children)
     }
 }
+

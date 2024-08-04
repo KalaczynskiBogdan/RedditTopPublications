@@ -28,7 +28,7 @@
         app:layout_constraintStart_toEndOf="@+id/tvAuthorOfPublication"
         app:layout_constraintTop_toTopOf="@id/tvAuthorOfPublication"
         app:layout_constraintBottom_toBottomOf="@id/tvAuthorOfPublication"
-        android:text="·" />
+        android:text="@string/symbol" />
 
     <TextView
         android:textColor="@color/grey2"
@@ -56,6 +56,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:contentDescription="@null"
             android:scaleType="fitXY"
             android:id="@+id/ivImageOfPublication"
             android:layout_width="104dp"
@@ -82,7 +83,6 @@
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivComments"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="1250 comments" />
 

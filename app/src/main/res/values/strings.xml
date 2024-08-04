@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">RedditTopPublications</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="symbol">·</string>
+    <string name="top">Top</string>
+    <string name="today">Today</string>
+    <string name="download">download</string>
+
+    <string name="hours_ago">%1$d hr. ago</string>
+    <string name="minutes_ago">%1$d min. ago</string>
+    <string name="comments">%1$d comments</string>
+
 </resources>
